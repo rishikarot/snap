@@ -137,6 +137,49 @@
 @media(max-width:850px){.metric-grid{grid-template-columns:repeat(var(--widget-cols-small,2),minmax(0,1fr))}.metric-grid>.metric:last-child:nth-child(odd){grid-column:1/-1}}
 @media(max-width:525px){.metric-grid{grid-template-columns:repeat(var(--widget-cols-small,2),minmax(0,1fr))}}
 @media(max-width:365px){.metric-grid{grid-template-columns:1fr}}
+
+/* Common Garage360 theme preference: an appearance setting, not a role permission. */
+:root{--accent:#30485e;--accent-dark:#23384b;--accent-tint:#eef3f6;--accent-ring:#83a4c2;--focus-color:#7da7c9}
+:root[data-dashboard-theme="green"]{--accent:#21894b;--accent-dark:#166e39;--accent-tint:#edf8f1;--accent-ring:#31b761;--focus-color:#84d9a4}
+:root[data-dashboard-theme="blue"]{--accent:#276fe2;--accent-dark:#195ac4;--accent-tint:#eef5ff;--accent-ring:#3983f5;--focus-color:#86b5ff}
+:root[data-dashboard-theme="purple"]{--accent:#8b3bd5;--accent-dark:#742bc1;--accent-tint:#f6efff;--accent-ring:#a653ef;--focus-color:#caa0ef}
+:root[data-dashboard-theme="orange"]{--accent:#bc500e;--accent-dark:#994008;--accent-tint:#fff4eb;--accent-ring:#f97316;--focus-color:#f8b48b}
+button:focus-visible,input:focus-visible,select:focus-visible{outline-color:var(--focus-color)}
+.brandmark{background:var(--accent)}
+.navbtn.active{background:var(--accent-tint);color:var(--accent)}
+.navbtn.active .icon{color:var(--accent)}
+.navbtn:hover{background:var(--accent-tint)}
+.period-toggle,.btn-dark{background:var(--accent);border-color:var(--accent)}
+.period-toggle:hover,.btn-dark:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
+.preset.active{background:var(--accent);border-color:var(--accent)}
+.preset.active .preset-dates{color:rgba(255,255,255,.82)}
+.metric:hover{border-color:var(--accent-ring)}
+.metric:hover .metric-icon{color:var(--accent);background:var(--accent-tint)}
+.queue-row:hover .q-label,.text-action:hover{color:var(--accent)}
+.mobile-nav button.active{color:var(--accent)}
+.widget-option input{accent-color:var(--accent)}
+.aging-band.active{background:var(--accent-tint);border-color:var(--accent-ring);box-shadow:inset 0 0 0 1px var(--accent-ring)}
+.aging-band.active strong{color:var(--accent)}
+.bar-group:focus-visible{outline-color:var(--accent-ring)}
+/* Chart series retain constant, meaningful Navy=Pending and Sage=Collected. */
+.customize-menu{width:365px;max-width:calc(100vw - 24px)}
+.customize-head strong{font-size:15px}
+.appearance-section{padding:13px 0 13px;border-bottom:1px solid var(--line)}
+.appearance-heading{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:1px 0 13px}
+.appearance-heading strong{font-size:11px;text-transform:uppercase;letter-spacing:.75px;color:#5a6977}
+.appearance-heading span{font-size:10px;color:#93a0ad;white-space:nowrap}
+.theme-choices{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
+.theme-choice{min-width:0;display:flex;flex-direction:column;align-items:center;gap:9px;padding:5px 0 2px;border:0;border-radius:8px;background:transparent;color:#8693a1;font-size:10px;font-weight:650;line-height:1.2}
+.theme-choice:hover{background:#f7f9fb;color:#3b4652}
+.theme-dot{width:32px;height:32px;border-radius:50%;background:var(--swatch);display:grid;place-items:center;color:#fff;border:2px solid white;box-shadow:0 0 0 1px #e7ebef;transition:box-shadow .15s,transform .15s}
+.theme-choice[aria-pressed="true"]{color:var(--ink);font-weight:800}
+.theme-choice[aria-pressed="true"] .theme-dot{box-shadow:0 0 0 2px white,0 0 0 4px var(--focus-color);transform:scale(1.02)}
+.theme-choice .icon{width:17px;height:17px;stroke-width:3;opacity:0}
+.theme-choice[aria-pressed="true"] .icon{opacity:1}
+.appearance-help{font-size:10px;color:#97a2ae;margin:11px 1px 0;line-height:1.5}
+.widget-configuration-title{margin:14px 0 0;font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:#5a6977;font-weight:800}
+.customize-intro{margin-top:5px}
+@media(max-width:700px){.customize-menu{width:365px}.appearance-section{padding-top:10px}.theme-dot{width:33px;height:33px}}
 </style></head><body><svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
 <symbol id="i-garage" viewBox="0 0 24 24"><path d="M3 10V6l9-4 9 4v4M3 10h18v11H3zM7 21v-7h10v7M7 10h.01M17 10h.01"/></symbol>
 <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="8" rx="1.2"/><rect x="14" y="3" width="7" height="5" rx="1.2"/><rect x="14" y="12" width="7" height="9" rx="1.2"/><rect x="3" y="15" width="7" height="6" rx="1.2"/></symbol>
@@ -185,8 +228,9 @@
  <div class="topline"><div><div class="eyebrow">Workshop overview</div><h1 class="title">Workshop at a glance</h1><p class="subtitle">What's happening, what needs attention, and where the money stands.</p></div><div class="top-actions">
   <label class="role-control"><span>Preview role</span><select id="roleSelect" aria-label="Preview dashboard role"><option value="owner">Garage owner</option><option value="advisor">Service advisor</option><option value="accounts">Accounts</option><option value="other">Other role</option></select></label>
   <div class="customize-wrap"><button id="customizeBtn" class="outline-btn" aria-expanded="false" aria-controls="customizeMenu"><svg class="icon sm"><use href="#i-settings"/></svg><span>Customize</span></button>
-  <div class="customize-menu" id="customizeMenu" hidden><div class="customize-head"><div><strong>My dashboard widgets</strong><small id="customRoleNote">Saved for this role</small></div><button id="closeCustomize" class="mini-iconbtn" aria-label="Close customization">✕</button></div>
-  <div class="customize-intro">Show, hide or reorder widgets available to this role. Financial widgets are restricted to permitted roles.</div><div id="customizeWidgets" class="widget-options"></div><div class="customize-foot"><button id="resetLayout" class="outline-btn">Restore defaults</button><button id="doneCustomize" class="btn-dark">Done</button></div><p class="customize-notice">Role switching is a demo preview. Real permissions must be enforced by the backend.</p></div></div>
+  <div class="customize-menu" id="customizeMenu" hidden><div class="customize-head"><div><strong>Customize dashboard</strong><small>Personal settings</small></div><button id="closeCustomize" class="mini-iconbtn" aria-label="Close customization">✕</button></div>
+  <section class="appearance-section" aria-labelledby="appearanceHeading"><div class="appearance-heading"><strong id="appearanceHeading">Theme color</strong><span>Shared across all roles</span></div><div id="themeChoices" class="theme-choices" role="group" aria-label="Choose dashboard theme"></div><p class="appearance-help">Changes apply instantly to your dashboard and are saved for your next visit.</p></section>
+  <div class="widget-configuration-title">My widgets</div><div class="customize-intro" id="customRoleNote">Saved for this role</div><div class="customize-intro">Show, hide or reorder widgets permitted for this role.</div><div id="customizeWidgets" class="widget-options"></div><div class="customize-foot"><button id="resetLayout" class="outline-btn">Restore defaults</button><button id="doneCustomize" class="btn-dark">Done</button></div><p class="customize-notice">Role switching is a demo preview. Real permissions must be enforced by the backend.</p></div></div>
   <button id="exportOverview" class="outline-btn"><svg class="icon sm"><use href="#i-download"/></svg><span class="export-text">Export report</span></button></div></div>
  <section class="filterpanel compact" aria-label="Dashboard reporting date"><div class="filter-toolbar">
   <div class="date-control"><button class="period-toggle" id="periodToggle" aria-expanded="false" aria-controls="periodPopover"><svg class="icon sm"><use href="#i-calendar"/></svg><span id="periodLabel">Today</span><svg class="icon sm period-chevron"><use href="#i-down"/></svg></button>
@@ -252,6 +296,12 @@ for(let d=`${+TODAY.slice(0,4)-1}-01-01`;d<=TODAY;d=add(d,1)){
 const LS_PATCH=`g360-role-dashboard-v5-actions-${TODAY}`,LS_LAYOUT='g360-role-dashboard-v5-layout',LS_ROLE='g360-role-dashboard-v5-role';
 function fromStore(key,fallback){try{return JSON.parse(localStorage.getItem(key)||'null')??fallback}catch{return fallback}}
 function persist(key,obj){try{localStorage.setItem(key,JSON.stringify(obj))}catch{showToast('Local storage is unavailable; changes may not persist.')}}
+// One user-wide theme choice for all role previews (separate from role widget layouts).
+const LS_THEME='g360-dashboard-global-theme-v1';
+const THEMES=[{id:'default',name:'Default',swatch:'#30485e'},{id:'green',name:'Green',swatch:'#2ebc60'},{id:'blue',name:'Blue',swatch:'#3b82f6'},{id:'purple',name:'Purple',swatch:'#a855f7'},{id:'orange',name:'Orange',swatch:'#f97316'}];
+let dashboardTheme=fromStore(LS_THEME,'default');
+if(!THEMES.some(x=>x.id===dashboardTheme))dashboardTheme='default';
+document.documentElement.setAttribute('data-dashboard-theme',dashboardTheme);
 let patches=fromStore(LS_PATCH,{}),layouts=fromStore(LS_LAYOUT,{});role=fromStore(LS_ROLE,'owner');
 const ROLE_NAMES={owner:'Garage owner',advisor:'Service advisor',accounts:'Accounts',other:'Other role'};if(!ROLE_NAMES[role])role='owner';
 const METRICS={
@@ -336,7 +386,18 @@ $('roleSelect').onchange=e=>{closeDrawer();role=e.target.value;persist(LS_ROLE,r
 function toggleSettings(force){let open=typeof force==='boolean'?force:$('customizeMenu').hidden;$('customizeMenu').hidden=!open;$('customizeBtn').setAttribute('aria-expanded',String(open));if(open){dismissDate();renderSettings()}}
 $('customizeBtn').onclick=()=>toggleSettings();$('closeCustomize').onclick=()=>toggleSettings(false);$('doneCustomize').onclick=()=>toggleSettings(false);
 $('resetLayout').onclick=()=>{saveConfig(structuredClone(DEFAULT[role]));render();renderSettings();showToast('Role defaults restored')};
-function renderSettings(){const c=config(), a=ALLOWED[role];$('customRoleNote').textContent=ROLE_NAMES[role]+' · '+(a.metrics.length+a.attention.length+(a.chart?1:0)+1)+' permitted widgets';let output='';
+function renderThemeChoices(){
+ $('themeChoices').innerHTML=THEMES.map(t=>`<button type="button" class="theme-choice" data-set-theme="${t.id}" aria-pressed="${dashboardTheme===t.id}" aria-label="${t.name} dashboard theme" title="${t.name} theme"><span class="theme-dot" style="--swatch:${t.swatch}"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg></span><span>${t.name}</span></button>`).join('');
+}
+$('themeChoices').addEventListener('click',e=>{
+ const b=e.target.closest('[data-set-theme]');if(!b)return;
+ // Re-rendering the clicked swatch detaches its node; prevent outside-click dismissal.
+ e.stopPropagation();
+ const next=b.dataset.setTheme;if(!THEMES.some(t=>t.id===next))return;
+ dashboardTheme=next;document.documentElement.setAttribute('data-dashboard-theme',next);persist(LS_THEME,next);
+ renderThemeChoices();showToast(`${THEMES.find(t=>t.id===next).name} theme applied to all roles`);
+});
+function renderSettings(){renderThemeChoices();const c=config(), a=ALLOWED[role];$('customRoleNote').textContent=ROLE_NAMES[role]+' · '+(a.metrics.length+a.attention.length+(a.chart?1:0)+1)+' permitted widgets';let output='';
  for(const [cat,label,defs] of [['metrics','Date-filtered cards',METRICS],['attention','Needs attention · live totals',ATTENTION]]){
   output+=`<div class="widget-group-label">${label}</div>`;
   const ordered=[...c[cat],...a[cat].filter(x=>!c[cat].includes(x))];
@@ -476,6 +537,6 @@ $('resetDemo').onclick=()=>{if(!confirm('Reset sample record changes? Widget pre
 document.body.addEventListener('click',e=>{const open=e.target.closest('[data-open]');if(open){openDrawer(open.dataset.open);return}const d=e.target.closest('[data-detail]');if(d){if(!drawerMode)openDrawer('recent');detail=d.dataset.detail;renderDrawer();return}const nav=e.target.closest('[data-navigation]');if(nav){let mode=nav.dataset.navigation;if(mode==='dashboard')closeDrawer();else if(mode==='inspections')openDrawer('vehicle');else if(mode==='jobs')openDrawer('active');else if(mode==='invoices')openDrawer('invoiced');else if(mode==='payments')openDrawer('collected')}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(drawerMode)closeDrawer();dismissDate();toggleSettings(false)}});
 makePresets();render();
-window.Garage360Demo={get state(){return{role,period:{...period},summary:{...data.sums},config:config(),today:TODAY}},setRole(r){if(ROLE_NAMES[r]){$('roleSelect').value=r;$('roleSelect').dispatchEvent(new Event('change'))}},setPeriod,resetPreferences(){delete layouts[role];persist(LS_LAYOUT,layouts);render()},openDrawer};
+window.Garage360Demo={get state(){return{role,theme:dashboardTheme,period:{...period},summary:{...data.sums},config:config(),today:TODAY}},setRole(r){if(ROLE_NAMES[r]){$('roleSelect').value=r;$('roleSelect').dispatchEvent(new Event('change'))}},setPeriod,resetPreferences(){delete layouts[role];persist(LS_LAYOUT,layouts);render()},openDrawer};
 })();
 </script></body></html>
